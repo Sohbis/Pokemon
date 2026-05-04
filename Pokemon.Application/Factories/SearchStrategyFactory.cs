@@ -4,6 +4,7 @@ using Pokemon.Application.Strategies;
 using Pokemon.Domain.Entities;
 using System;
 using Pokemon.Application.Constants;
+using Pokemon.Domain.Enums;
 namespace Pokemon.Application.Factories
 {
     public class SearchStrategyFactory
@@ -43,8 +44,8 @@ namespace Pokemon.Application.Factories
 
             var strategy =
             request.Id.HasValue
-               ? _searchStrategies.FirstOrDefault(s => s.StrategyName == ApplicationConstant.POKEMONBYIDSEARCH) :
-               _searchStrategies.FirstOrDefault(s => s.StrategyName == ApplicationConstant.POKEMONBYNAMESEARCH);
+               ? _searchStrategies.FirstOrDefault(s => s.StrategyName == SearchCriteriaType.ById) :
+               _searchStrategies.FirstOrDefault(s => s.StrategyName == SearchCriteriaType.ByName);
 
             if (strategy != null)
             {

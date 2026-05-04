@@ -1,10 +1,11 @@
 using Pokemon.Application.Models;
 using Pokemon.Domain.Entities;
+using Pokemon.Domain.Enums;
 
 public interface ISearchStrategy
 {
     //public bool CanHandle (string criteria);
-    string StrategyName { get; }
+    public SearchCriteriaType StrategyName { get; }
     public Task<PokemonDetails> SearchAsync(PokemonSearchRequest criteria);
 }
 //public interface ISearchStrategy<T> : ISearchStrategy

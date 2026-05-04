@@ -2,6 +2,7 @@
 using Pokemon.Application.Models;
 using Pokemon.Domain.Entities;
 using Pokemon.Domain.Interfaces;
+using Pokemon.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,9 @@ namespace Pokemon.Application.Strategies
             _pokemonRepository = pokemonRepository;
         }
 
-        public string StrategyName => ApplicationConstant.POKEMONBYIDSEARCH;
+        //public string StrategyName => ApplicationConstant.POKEMONBYIDSEARCH;
+
+        public SearchCriteriaType StrategyName => SearchCriteriaType.ById;
 
         //public bool CanHandle(string criteria)
         //{

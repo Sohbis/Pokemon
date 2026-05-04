@@ -2,6 +2,7 @@
 using Pokemon.Application.Models;
 using Pokemon.Domain.Entities;
 using Pokemon.Domain.Interfaces;
+using Pokemon.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,15 @@ namespace Pokemon.Application.Strategies
     {
         private readonly IPokemonRepository _pokemonRepository;
 
-        public PokemonByNameStrategy(IPokemonRepository pokemonRepository )
+        public PokemonByNameStrategy(IPokemonRepository pokemonRepository)
         {
             _pokemonRepository = pokemonRepository;
         }
 
-        public string StrategyName => ApplicationConstant.POKEMONBYNAMESEARCH;
+        //public string StrategyName => ApplicationConstant.POKEMONBYNAMESEARCH;
+
+        public SearchCriteriaType StrategyName => SearchCriteriaType.ByName;
+
         public Task<PokemonDetails> SearchAsync(PokemonSearchRequest request)
         {
             var pokemon = _pokemonRepository.GetPokemonBySearchAsync(request.Name);
