@@ -40,10 +40,16 @@ namespace Pokemon.Application.Factories
 
         public ISearchStrategy GetSearchStrategy(PokemonSearchRequest request)
         {
-            return request.Id.HasValue
+
+            var strategy =
+            request.Id.HasValue
                ? _searchStrategies.FirstOrDefault(s => s.StrategyName == ApplicationConstant.POKEMONBYIDSEARCH) :
                _searchStrategies.FirstOrDefault(s => s.StrategyName == ApplicationConstant.POKEMONBYNAMESEARCH);
 
+            if (strategy != null)
+            {
+                return strategy;
+            }
             throw new ArgumentException("Search criteria must include an Id or a Name.");
 
         }

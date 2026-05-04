@@ -24,6 +24,11 @@ namespace Pokemon.Infrastructure.Repositories
         {
             var pokemonDetails = await _pokeApiHttpClient.GetPokemonBySearchAsync(searchCriteria);
 
+            if (pokemonDetails == null)
+            {
+                throw new ArgumentException("No Pokemon found with the given search criteria."); ;
+            }
+
             var searchedPokemon = new PokemonDetails
             {
                 PokemonName = pokemonDetails.PokemonName,
