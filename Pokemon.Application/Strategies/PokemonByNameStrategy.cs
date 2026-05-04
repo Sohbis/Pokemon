@@ -20,7 +20,7 @@ namespace Pokemon.Application.Strategies
             _pokemonRepository = pokemonRepository;
         }
 
-        public string StrategyName => ApplicationConstant.POKEMONBYIDSEARCH;
+        public string StrategyName => ApplicationConstant.POKEMONBYNAMESEARCH;
         public Task<PokemonDetails> SearchAsync(PokemonSearchRequest request)
         {
             var pokemon = _pokemonRepository.GetPokemonBySearchAsync(request.Name);
