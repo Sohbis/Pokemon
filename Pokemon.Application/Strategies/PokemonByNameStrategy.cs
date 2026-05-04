@@ -1,4 +1,6 @@
-﻿using Pokemon.Domain.Entities;
+﻿using Pokemon.Application.Constants;
+using Pokemon.Application.Models;
+using Pokemon.Domain.Entities;
 using Pokemon.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace Pokemon.Application.Strategies
 {
-    public class PokemonByNameStrategy : ISearchStrategy, ISearchStrategy<string>
+    //public class PokemonByNameStrategy : ISearchStrategy, ISearchStrategy<string>
+    public class PokemonByNameStrategy : ISearchStrategy
     {
         private readonly IPokemonRepository _pokemonRepository;
 
@@ -16,9 +19,11 @@ namespace Pokemon.Application.Strategies
         {
             _pokemonRepository = pokemonRepository;
         }
-        public Task<PokemonDetails> SearchAsync(string name)
+
+        public string StrategyName => ApplicationConstant.POKEMONBYIDSEARCH;
+        public Task<PokemonDetails> SearchAsync(PokemonSearchRequest request)
         {
-            var pokemon = _pokemonRepository.GetPokemonBySearchAsync(name);
+            var pokemon = _pokemonRepository.GetPokemonBySearchAsync(request.Name);
             return pokemon;
         }
     }

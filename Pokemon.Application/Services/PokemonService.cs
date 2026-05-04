@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Pokemon.Application.Factories;
 
 namespace Pokemon.Application.Services
 {
@@ -64,7 +65,8 @@ namespace Pokemon.Application.Services
 
         public async Task<PokemonSearchDto> PokemonBySearchAsync(PokemonSearchRequest searchCriteria)
         {
-            var pokemon = await _searchStrategyFactory.GetSearchStrategy(searchCriteria);
+            var strategy = _searchStrategyFactory.GetSearchStrategy(searchCriteria);
+            var pokemon = await strategy.SearchAsync(searchCriteria);
             PokemonSearchDto searchedPokemon = new()
             {
                 Name = pokemon.PokemonName,

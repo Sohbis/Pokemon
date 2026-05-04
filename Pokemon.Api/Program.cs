@@ -2,7 +2,7 @@
 using Pokemon.Application;
 using Pokemon.Application.Strategies;
 using Pokemon.Infrastructure;
-//using Pokemon.Application.Services;
+using Pokemon.Application.Factories;
 namespace Pokemon.Api
 {
     public class Program
@@ -17,8 +17,8 @@ namespace Pokemon.Api
             builder.Services.AddInfrastructureDependencies();
             builder.Services.AddScoped<ISearchStrategy, PokemonByIdStrategy>();
             builder.Services.AddScoped<ISearchStrategy, PokemonByNameStrategy>();
-            builder.Services.AddScoped<ISearchStrategy<int>, PokemonByIdStrategy>();
-            builder.Services.AddScoped<ISearchStrategy<string>, PokemonByNameStrategy>();
+            //builder.Services.AddScoped<ISearchStrategy<int>, PokemonByIdStrategy>();
+            //builder.Services.AddScoped<ISearchStrategy<string>, PokemonByNameStrategy>();
             builder.Services.AddScoped<SearchStrategyFactory>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
