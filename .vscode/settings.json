@@ -1,0 +1,12 @@
+{
+  "github.copilot.chat.reviewSelection.instructions": [
+    {
+      "text": "Review for Clean Architecture layer violations, missing async/await, entities exposed instead of DTOs, missing pagination, hardcoded connection strings, SOLID violations."
+    }
+  ],
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Conventional commits for ASP.NET: feat|fix|refactor|chore. Reference the layer (domain/application/infrastructure/api). Example: feat(application): add CreateUserCommandHandler"
+    }
+  ]
+}
