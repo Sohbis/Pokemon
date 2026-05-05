@@ -26,7 +26,7 @@ namespace Pokemon.Infrastructure.Repositories
 
             if (pokemonDetails == null)
             {
-                throw new ArgumentException("No Pokemon found with the given search criteria."); ;
+                throw new InvalidOperationException("No Pokemon found with the given search criteria.");
             }
 
             var searchedPokemon = new PokemonDetails
