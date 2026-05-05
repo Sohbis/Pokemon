@@ -16,6 +16,7 @@ public class PokemonSearchRequest : IValidatableObject
     public int? Id { get; init; }
     [MaxLength(50, ErrorMessage = "Name must be 50 characters or fewer.")]
     [MinLength(2, ErrorMessage = "Name must be at least 2 characters long.")]
+    [RegularExpression(@"^[a-zA-Z0-9\-]+$")]
     public string? Name { get; init; }
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

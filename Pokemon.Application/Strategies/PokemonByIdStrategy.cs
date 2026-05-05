@@ -29,9 +29,9 @@ namespace Pokemon.Application.Strategies
         //    throw new NotImplementedException();
         //}
 
-        public Task<PokemonDetails> SearchAsync(PokemonSearchRequest request)
+        public async Task<PokemonDetails> SearchAsync(PokemonSearchRequest request)
         {
-            var pokemon = _pokemonRepository.GetPokemonBySearchAsync(request.Id!.Value);
+            var pokemon = await _pokemonRepository.GetPokemonBySearchAsync(request.Id!.Value);
             if (pokemon == null)
             {
                 throw new ArgumentException("No Pokemon found with this Id");

@@ -25,9 +25,9 @@ namespace Pokemon.Application.Strategies
 
         public SearchCriteriaType StrategyName => SearchCriteriaType.ByName;
 
-        public Task<PokemonDetails> SearchAsync(PokemonSearchRequest request)
+        public async Task<PokemonDetails> SearchAsync(PokemonSearchRequest request)
         {
-            var pokemon = _pokemonRepository.GetPokemonBySearchAsync(request.Name);
+            var pokemon = await _pokemonRepository.GetPokemonBySearchAsync(request.Name);
             if (pokemon == null)
             {
                 throw new ArgumentException("No Pokemon found with this name");

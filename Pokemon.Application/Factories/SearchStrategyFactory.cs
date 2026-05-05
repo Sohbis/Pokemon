@@ -51,7 +51,7 @@ namespace Pokemon.Application.Factories
             {
                 return strategy;
             }
-            throw new ArgumentException("Search criteria must include an Id or a Name.");
+            throw new InvalidOperationException("No Strategy found for given Id/Name.");
 
         }
 
