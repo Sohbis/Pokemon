@@ -1,6 +1,7 @@
 ﻿using Pokemon.Domain.Entities;
 using Pokemon.Domain.Enums;
 using Pokemon.Domain.Interfaces;
+using Pokemon.Infrastructure.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;

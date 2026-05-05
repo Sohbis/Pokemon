@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Pokemon.Domain.Interfaces;
+using Pokemon.Infrastructure.Http;
 using Pokemon.Infrastructure.Repositories;
 
-namespace Pokemon.Infrastructure
+namespace Pokemon.Infrastructure.DependencyInjection
 {
     public static class InfrastructureDependencyInjection
     {

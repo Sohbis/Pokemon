@@ -1,8 +1,8 @@
 
 using Pokemon.Application;
 using Pokemon.Application.Strategies;
-using Pokemon.Infrastructure;
 using Pokemon.Application.Factories;
+using Pokemon.Infrastructure.DependencyInjection;
 namespace Pokemon.Api
 {
     public class Program

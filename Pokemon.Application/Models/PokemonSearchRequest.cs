@@ -1,3 +1,4 @@
+using Pokemon.Application.Extensions;
 using Pokemon.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 

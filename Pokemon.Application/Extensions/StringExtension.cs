@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pokemon.Application
+namespace Pokemon.Application.Extensions
 {
     public static class StringExtension
     {
