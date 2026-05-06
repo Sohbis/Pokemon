@@ -58,8 +58,8 @@ namespace Pokemon.Api.Controllers
         public async Task<IActionResult> GetPokemonBySearch([FromBody] PokemonSearchRequest searchRequest)
         {
             var pokemon = await _pokemonService.PokemonBySearchAsync(searchRequest);
-            if (pokemon == null)
-                return NotFound();
+            //if (pokemon == null)
+            //    return NotFound();
             return Ok(pokemon);
         }
 

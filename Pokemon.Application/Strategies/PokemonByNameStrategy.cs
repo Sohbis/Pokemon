@@ -1,8 +1,9 @@
 ﻿using Pokemon.Application.Constants;
 using Pokemon.Application.Models;
 using Pokemon.Domain.Entities;
-using Pokemon.Domain.Interfaces;
 using Pokemon.Domain.Enums;
+using Pokemon.Domain.Exceptions;
+using Pokemon.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,10 +29,10 @@ namespace Pokemon.Application.Strategies
         public async Task<PokemonDetails> SearchAsync(PokemonSearchRequest request)
         {
             var pokemon = await _pokemonRepository.GetPokemonBySearchAsync(request.Name);
-            //if (pokemon == null)
-            //{
-            //    throw new ArgumentException("No Pokemon found with this name");
-            //}
+            if (pokemon == null)
+            {
+                throw new PokemonNotFoundException($"with Name '{request.Name}'");
+            }
             return pokemon;
         }
     }

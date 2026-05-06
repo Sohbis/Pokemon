@@ -26,17 +26,21 @@ namespace Pokemon.Infrastructure.Repositories
         {
             var pokemonDetails = await _pokeApiHttpClient.GetPokemonBySearchAsync(searchCriteria);
 
-            if (pokemonDetails == null)
+            //if (pokemonDetails == null)
+            //{
+            //    throw new PokemonNotFoundException(searchCriteria.ToString());
+            //}
+            if (pokemonDetails != null)
             {
-                throw new PokemonNotFoundException(searchCriteria.ToString());
+                var searchedPokemon = new PokemonDetails
+                {
+                    PokemonName = pokemonDetails.PokemonName,
+                    PokemonSprites = pokemonDetails.PokemonSprite.Sprite,
+                };
+                return searchedPokemon;
             }
 
-            var searchedPokemon = new PokemonDetails
-            {
-                PokemonName = pokemonDetails.PokemonName,
-                PokemonSprites = pokemonDetails.PokemonSprite.Sprite,
-            };
-            return searchedPokemon;
+            return null;
         }
 
         public Task<PokemonDetails> GetPokemonByNameAsync()
