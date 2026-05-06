@@ -1,7 +1,8 @@
-
+﻿
+using Pokemon.Api.Middleware;
 using Pokemon.Application;
-using Pokemon.Application.Strategies;
 using Pokemon.Application.Factories;
+using Pokemon.Application.Strategies;
 using Pokemon.Infrastructure.DependencyInjection;
 namespace Pokemon.Api
 {
@@ -40,7 +41,7 @@ namespace Pokemon.Api
 
             app.UseAuthorization();
 
-
+            app.UseGlobalExceptionHandler(); // ← add (before MapControllers)
             app.MapControllers();
 
             app.Run();

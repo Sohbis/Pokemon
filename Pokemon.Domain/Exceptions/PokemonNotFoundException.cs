@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Pokemon.Domain.Exceptions
 {
-    internal class Class2
+    public class PokemonNotFoundException : DomainException
     {
+        
+        public PokemonNotFoundException(string identifier) : base($"Pokémon '{identifier}' was not found.", 404)
+        {
+
+        }
     }
 }

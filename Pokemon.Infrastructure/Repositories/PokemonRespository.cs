@@ -1,5 +1,6 @@
 ﻿using Pokemon.Domain.Entities;
 using Pokemon.Domain.Enums;
+using Pokemon.Domain.Exceptions;
 using Pokemon.Domain.Interfaces;
 using Pokemon.Infrastructure.Http;
 using System;
@@ -27,7 +28,7 @@ namespace Pokemon.Infrastructure.Repositories
 
             if (pokemonDetails == null)
             {
-                throw new InvalidOperationException("No Pokemon found with the given search criteria.");
+                throw new PokemonNotFoundException(searchCriteria.ToString());
             }
 
             var searchedPokemon = new PokemonDetails

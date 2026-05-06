@@ -32,10 +32,10 @@ namespace Pokemon.Application.Strategies
         public async Task<PokemonDetails> SearchAsync(PokemonSearchRequest request)
         {
             var pokemon = await _pokemonRepository.GetPokemonBySearchAsync(request.Id!.Value);
-            if (pokemon == null)
-            {
-                throw new ArgumentException("No Pokemon found with this Id");
-            }
+            //if (pokemon == null)
+            //{
+            //    throw new ArgumentException("No Pokemon found with this Id");
+            //}
             return pokemon;
         }
 

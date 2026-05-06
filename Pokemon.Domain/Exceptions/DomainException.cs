@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Pokemon.Domain.Exceptions
 {
-    internal class Class1
+    public abstract class DomainException:Exception
     {
+        public int StatusCode { get; }
+        protected DomainException(string message,int statuscode):base(message)
+        {
+            StatusCode = statuscode;
+        }
     }
 }

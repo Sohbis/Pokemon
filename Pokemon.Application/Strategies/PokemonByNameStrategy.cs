@@ -28,10 +28,10 @@ namespace Pokemon.Application.Strategies
         public async Task<PokemonDetails> SearchAsync(PokemonSearchRequest request)
         {
             var pokemon = await _pokemonRepository.GetPokemonBySearchAsync(request.Name);
-            if (pokemon == null)
-            {
-                throw new ArgumentException("No Pokemon found with this name");
-            }
+            //if (pokemon == null)
+            //{
+            //    throw new ArgumentException("No Pokemon found with this name");
+            //}
             return pokemon;
         }
     }
