@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Pokemon.Infrastructure.Models
 {
-    public sealed class PokemonListResponse
+    public class PokemonListResponse
     {
-        [JsonPropertyName("name")]
-        public string PokemonName { get; set; } = string.Empty;
+        //[JsonPropertyName("name")]
+        //public string PokemonName { get; set; } = string.Empty;
         [JsonPropertyName("order")]
         public int Order { get; set; }
         //[JsonPropertyName("abilities")]
@@ -20,7 +20,7 @@ namespace Pokemon.Infrastructure.Models
         //public PokemonTypes Types { get; set; } = new PokemonTypes();
     }
 
-    public sealed class PokemonNameListResponse
+    public sealed class PokemonNamesListResponse
     {
         [JsonPropertyName("results")]
         public IEnumerable<PokemonName> PokemonNames { get; init; } = Enumerable.Empty<PokemonName>();

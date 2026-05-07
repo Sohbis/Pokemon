@@ -3,6 +3,7 @@ using Pokemon.Domain.Enums;
 using Pokemon.Domain.Exceptions;
 using Pokemon.Domain.Interfaces;
 using Pokemon.Infrastructure.Http;
+using Pokemon.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +24,18 @@ namespace Pokemon.Infrastructure.Repositories
             var pokemonList = await _pokeApiHttpClient.GetPokemonListAsync(offset, limit);
             if (pokemonList != null)
             {
-                var pokemonListResult = pokemonList.Select(p => new PokemonList
+                var tasks = new List<Task<PokemonDetails>>();
+
+                foreach (var pokemon in pokemonList.PokemonNames)
                 {
-                    Name = p.PokemonName,
+                    var name = pokemon.Name;
+                    tasks.Add(GetPokemonBySearchAsync(pokemon.Name));
+                }
+                var results = await Task.WhenAll(tasks) ?? Array.Empty<PokemonDetails>();
+
+                var pokemonListResult = results.Select(p => new PokemonList
+                {
+                    PokemonName = p.PokemonName,
                     Order = p.Order,
                     //Abilities = p.Abilities,
                     //Type = p.Types,
@@ -48,6 +58,7 @@ namespace Pokemon.Infrastructure.Repositories
                 {
                     PokemonName = pokemonDetails.PokemonName,
                     PokemonSprites = pokemonDetails.PokemonSprite.Sprite,
+                    Order=pokemonDetails.Order
                 };
                 return searchedPokemon;
             }

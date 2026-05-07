@@ -14,7 +14,8 @@ namespace Pokemon.Application.Common.Interfaces
     {
         //IEnumerable<PokemonListItemDto> GetPokemonsAsync();
         //Task<PokemonSearchDto> PokemonBySearchAsync<T>(T searchCriteria);
-        Task<IEnumerable<PokemonListItemDto>> GetPokemonsListAsync(PokemonListRequest param);
+        Task<IEnumerable<PokemonListItemDto>> GetPokemonNamesListAsync(PokemonListRequest param);
+        //Task<PokemonListItemDto> GetPokemonDetailListAsync(PokemonListRequest param);
         Task<PokemonSearchDto> PokemonBySearchAsync(PokemonSearchRequest searchCriteria);
     }
 }

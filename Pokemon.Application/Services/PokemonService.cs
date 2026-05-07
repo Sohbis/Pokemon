@@ -1,14 +1,16 @@
-﻿using Pokemon.Application.Common.Interfaces;
+﻿using MediatR;
+using Pokemon.Application.Common.Interfaces;
 using Pokemon.Application.DTOs;
+using Pokemon.Application.Factories;
 using Pokemon.Application.Models;
 using Pokemon.Domain.Enums;
+using Pokemon.Domain.Exceptions;
 using Pokemon.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Pokemon.Application.Factories;
 
 namespace Pokemon.Application.Services
 {
@@ -23,12 +25,16 @@ namespace Pokemon.Application.Services
             _searchStrategyFactory = searchStrategyFactory;
         }
 
-        public async Task<IEnumerable<PokemonListItemDto>> GetPokemonsListAsync(PokemonListRequest param)
+        public async Task<IEnumerable<PokemonListItemDto>> GetPokemonNamesListAsync(PokemonListRequest param)
         {
             var pokemonList = await _pokemonRepository.GetPokemonListAsync(param.Offset,param.Limit);
+            if(pokemonList == null || !pokemonList.Any())
+            {
+                throw new PokemonNotFoundException($"with offset '{param.Offset}' and limit '{param.Limit}'");
+            }
             var pokemonListDto = pokemonList.Select(p => new PokemonListItemDto
             {
-                Name = p.Name,
+                Name = p.PokemonName,
                 Order = p.Order,
                 //Abilities = string.Join(", ", p.PokemonAbilities),
                 //Type = string.Join(", ", p.PokemonTypes)

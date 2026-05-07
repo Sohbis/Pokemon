@@ -19,7 +19,7 @@ namespace Pokemon.Infrastructure.Http
             _httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<PokemonListResponse>?> GetPokemonListAsync(int offset, int limit)
+        public async Task<PokemonNamesListResponse?> GetPokemonListAsync(int offset, int limit)
         {
             var response = await _httpClient.GetAsync($"pokemon/?offset={offset}&limit={limit}");
             if (response.StatusCode == HttpStatusCode.NotFound)
@@ -29,7 +29,7 @@ namespace Pokemon.Infrastructure.Http
 
             //var temp = await response.Content.ReadAsStringAsync();
 
-            //PokemonNameListResponse pokemonNameList = JsonSerializer.Deserialize<PokemonNameListResponse>(temp)??new PokemonNameListResponse();
+            //PokemonNamesListResponse pokemonNameList = JsonSerializer.Deserialize<PokemonNamesListResponse>(temp)??new PokemonNamesListResponse();
 
             // var tasks  = new List<Task<PokemonListResponse?>>();
 
@@ -37,30 +37,30 @@ namespace Pokemon.Infrastructure.Http
             //    tasks.Add(GetPokemonListAsync(pokemon.Name));
 
 
-            var content = await response.Content.ReadFromJsonAsync<PokemonNameListResponse>();
+            var content = await response.Content.ReadFromJsonAsync<PokemonNamesListResponse>();
 
-            var tasks = new List<Task<PokemonListResponse?>>();
+            //var tasks = new List<Task<PokemonListResponse?>>();
 
-            foreach (var pokemon in content.PokemonNames)
-                tasks.Add(GetPokemonListAsync(pokemon.Name));
+            //foreach (var pokemon in content.PokemonNames)
+            //    tasks.Add(GetPokemonListAsync(pokemon.Name));
 
-            PokemonListResponse[] results = await Task.WhenAll(tasks) ?? Array.Empty<PokemonListResponse>();
+            //PokemonListResponse[] results = await Task.WhenAll(tasks) ?? Array.Empty<PokemonListResponse>();
 
-            return results;
+            return content;
         }
 
-        private async Task<PokemonListResponse?> GetPokemonListAsync(string pokemonName)
-        {
-            var response = await _httpClient.GetAsync($"pokemon/{pokemonName}");
-            if (response.StatusCode == HttpStatusCode.NotFound)
-            {
-                return null;
-            }
+        //public async Task<PokemonListResponse?> GetPokemonListAsync(string pokemonName)
+        //{
+        //    var response = await _httpClient.GetAsync($"pokemon/{pokemonName}");
+        //    if (response.StatusCode == HttpStatusCode.NotFound)
+        //    {
+        //        return null;
+        //    }
 
-            //var temp = await response.Content.ReadAsStringAsync();
+        //    //var temp = await response.Content.ReadAsStringAsync();
 
-            return await response.Content.ReadFromJsonAsync<PokemonListResponse>();
-        }
+        //    return await response.Content.ReadFromJsonAsync<PokemonListResponse>();
+        //}
 
         public async Task<PokemonSearchResponse?> GetPokemonBySearchAsync<T>(T param)
         {

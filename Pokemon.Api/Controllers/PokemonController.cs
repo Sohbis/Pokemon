@@ -21,7 +21,7 @@ namespace Pokemon.Api.Controllers
         [HttpGet("GetPokemonList", Name = "/GetPokemonList")]
         public  async Task<IActionResult> GetPokemonList([FromQuery] PokemonListRequest param)
         {
-            var list = await _pokemonService.GetPokemonsListAsync(param);
+            var list = await _pokemonService.GetPokemonNamesListAsync(param);
             //if(list == null || !list.Any())
             //    return NotFound();
             return Ok(list);

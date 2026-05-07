@@ -9,7 +9,7 @@ namespace Pokemon.Domain.Entities
 {
     public class PokemonList
     {
-        public string Name { get; set; } = string.Empty;
+        public string PokemonName { get; set; } = string.Empty;
         public int Order { get; set; }
         //public PokemonAbilities Abilities { get; set; } = new PokemonAbilities();
         //public PokemonTypes Type { get; set; } = new PokemonTypes();

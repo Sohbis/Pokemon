@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pokemon.Domain.Entities
 {
-    public class PokemonDetails
+    public class PokemonDetails: PokemonList
     {
-        public string PokemonName { get; set; }=string.Empty;
+        //public string PokemonName { get; set; }=string.Empty;
         public string PokemonSprites { get; set; }= string.Empty;
 
     }
