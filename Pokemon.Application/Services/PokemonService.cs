@@ -14,30 +14,43 @@ namespace Pokemon.Application.Services
 {
     public class PokemonService : IPokemonService
     {
-        //private readonly IPokemonRepository _pokemonRepository;
+        private readonly IPokemonRepository _pokemonRepository;
 
         private readonly SearchStrategyFactory _searchStrategyFactory;
         public PokemonService(IPokemonRepository pokemonRepository, SearchStrategyFactory searchStrategyFactory)
         {
-            //_pokemonRepository = pokemonRepository;
+            _pokemonRepository = pokemonRepository;
             _searchStrategyFactory = searchStrategyFactory;
         }
 
-        public IEnumerable<PokemonListItemDto> GetPokemonsAsync()
+        public async Task<IEnumerable<PokemonListItemDto>> GetPokemonsListAsync(PokemonListRequest param)
         {
-
-            var list = new List<PokemonListItemDto>
+            var pokemonList = await _pokemonRepository.GetPokemonListAsync(param.Offset,param.Limit);
+            var pokemonListDto = pokemonList.Select(p => new PokemonListItemDto
             {
-                new PokemonListItemDto{
-
-                Name="Bulbasaur",
-                Order=1,
-                Abilities="Overgrow, Chlorophyll",
-                Type="Grass/Poison"
-                }
-             };
-            return list;
+                Name = p.Name,
+                Order = p.Order,
+                //Abilities = string.Join(", ", p.PokemonAbilities),
+                //Type = string.Join(", ", p.PokemonTypes)
+            });
+            return pokemonListDto;
         }
+
+        //public IEnumerable<PokemonListItemDto> GetPokemonsAsync()
+        //{
+
+        //    var list = new List<PokemonListItemDto>
+        //    {
+        //        new PokemonListItemDto{
+
+        //        Name="Bulbasaur",
+        //        Order=1,
+        //        Abilities="Overgrow, Chlorophyll",
+        //        Type="Grass/Poison"
+        //        }
+        //     };
+        //    return list;
+        //}
 
         //public Task<PokemonSearchDto> PokemonBySearchAsync<T>(T searchCriteria)
         //{

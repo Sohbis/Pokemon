@@ -11,7 +11,7 @@ namespace Pokemon.Domain.Entities
     {
         public string Name { get; set; } = string.Empty;
         public int Order { get; set; }
-        public PokemonAbilities Abilities { get; set; } = new PokemonAbilities();
-        public PokemonTypes Type { get; set; } = new PokemonTypes();
+        //public PokemonAbilities Abilities { get; set; } = new PokemonAbilities();
+        //public PokemonTypes Type { get; set; } = new PokemonTypes();
     }
 }

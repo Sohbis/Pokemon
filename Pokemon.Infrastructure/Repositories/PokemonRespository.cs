@@ -18,9 +18,21 @@ namespace Pokemon.Infrastructure.Repositories
         {
             _pokeApiHttpClient = pokeApiHttpClient;
         }
-        public Task<IEnumerable<PokemonList>> GetPokemonListAsync()
+        public async Task<IEnumerable<PokemonList>> GetPokemonListAsync(int offset, int limit)
         {
-            throw new NotImplementedException();
+            var pokemonList = await _pokeApiHttpClient.GetPokemonListAsync(offset, limit);
+            if (pokemonList != null)
+            {
+                var pokemonListResult = pokemonList.Select(p => new PokemonList
+                {
+                    Name = p.PokemonName,
+                    Order = p.Order,
+                    //Abilities = p.Abilities,
+                    //Type = p.Types,
+                });
+                return pokemonListResult;
+            }
+            return Array.Empty<PokemonList>();
         }
         public async Task<PokemonDetails> GetPokemonBySearchAsync<T>(T searchCriteria)
         {
@@ -43,10 +55,10 @@ namespace Pokemon.Infrastructure.Repositories
             return null;
         }
 
-        public Task<PokemonDetails> GetPokemonByNameAsync()
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<PokemonDetails> GetPokemonByNameAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 
     }

@@ -12,9 +12,9 @@ namespace Pokemon.Application.Common.Interfaces
 {
     public interface IPokemonService
     {
-        IEnumerable<PokemonListItemDto> GetPokemonsAsync();
+        //IEnumerable<PokemonListItemDto> GetPokemonsAsync();
         //Task<PokemonSearchDto> PokemonBySearchAsync<T>(T searchCriteria);
-
+        Task<IEnumerable<PokemonListItemDto>> GetPokemonsListAsync(PokemonListRequest param);
         Task<PokemonSearchDto> PokemonBySearchAsync(PokemonSearchRequest searchCriteria);
     }
 }

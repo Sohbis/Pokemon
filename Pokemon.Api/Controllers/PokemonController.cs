@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pokemon.Application.Common.Interfaces;
+using Pokemon.Application.DTOs;
 using Pokemon.Application.Models;
-using Pokemon.Infrastructure.NewFolder;
+
 
 namespace Pokemon.Api.Controllers
 {
@@ -18,11 +19,11 @@ namespace Pokemon.Api.Controllers
         }
 
         [HttpGet("GetPokemonList", Name = "/GetPokemonList")]
-        public  IActionResult GetPokemonList()
+        public  async Task<IActionResult> GetPokemonList([FromQuery] PokemonListRequest param)
         {
-            var list = _pokemonService.GetPokemonsAsync();
-            if(list == null || !list.Any())
-                return NotFound();
+            var list = await _pokemonService.GetPokemonsListAsync(param);
+            //if(list == null || !list.Any())
+            //    return NotFound();
             return Ok(list);
         }
 
@@ -55,6 +56,9 @@ namespace Pokemon.Api.Controllers
         //}
 
         [HttpPost("search", Name = "GetPokemonBySearch")]
+        [ProducesResponseType(typeof(PokemonSearchDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetPokemonBySearch([FromBody] PokemonSearchRequest searchRequest)
         {
             var pokemon = await _pokemonService.PokemonBySearchAsync(searchRequest);

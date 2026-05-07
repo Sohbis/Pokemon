@@ -10,9 +10,9 @@ namespace Pokemon.Domain.Interfaces
 {
     public interface IPokemonRepository
     {
-        public Task<IEnumerable<PokemonList>> GetPokemonListAsync();
+        public Task<IEnumerable<PokemonList>> GetPokemonListAsync(int offset, int limit);
         public Task<PokemonDetails> GetPokemonBySearchAsync<T>(T searchCriteria);
-        public Task<PokemonDetails> GetPokemonByNameAsync();
+        //public Task<PokemonDetails> GetPokemonByNameAsync();
 
     }
 }
