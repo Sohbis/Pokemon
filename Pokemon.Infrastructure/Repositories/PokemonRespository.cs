@@ -66,7 +66,7 @@ namespace Pokemon.Infrastructure.Repositories
                 //    //Abilities = p.Abilities,
                 //    //Type = p.Types,
                 //});
-                //return pokemonListResult;
+                return pokemonListResult;
             }
             return Array.Empty<PokemonList>();
         }
