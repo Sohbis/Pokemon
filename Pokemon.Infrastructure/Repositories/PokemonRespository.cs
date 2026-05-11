@@ -31,16 +31,42 @@ namespace Pokemon.Infrastructure.Repositories
                     var name = pokemon.Name;
                     tasks.Add(GetPokemonBySearchAsync(pokemon.Name));
                 }
-                var results = await Task.WhenAll(tasks) ?? Array.Empty<PokemonDetails>();
+                //var results = await Task.WhenAll(tasks) ?? Array.Empty<PokemonDetails>();
 
-                var pokemonListResult = results.Select(p => new PokemonList
+                var results = await Task.WhenAll(tasks);
+                var pokemonListResult = new List<PokemonList>();
+                for (var i = 0; i < results.Length; i++)
                 {
-                    PokemonName = p.PokemonName,
-                    Order = p.Order,
-                    //Abilities = p.Abilities,
-                    //Type = p.Types,
-                });
-                return pokemonListResult;
+                    if (results[i] != null)
+                    {
+                        pokemonListResult.Add(new PokemonList
+                        {
+                            PokemonName = results[i].PokemonName,
+                            Order = results[i].Order,
+                            //Abilities = p.Abilities,
+                            //Type = p.Types,
+                        });
+                    }
+                    else
+                    {
+                        pokemonListResult.Add(new PokemonList
+                        {
+                            PokemonName = pokemonList.PokemonNames[i].Name,
+                            NotFound = true,
+                            //Abilities = p.Abilities,
+                            //Type = p.Types,
+                        });
+                    }
+                }
+
+                //var pokemonListResult = results.Select(p => new PokemonList
+                //{
+                //    PokemonName = p.PokemonName,
+                //    Order = p.Order,
+                //    //Abilities = p.Abilities,
+                //    //Type = p.Types,
+                //});
+                //return pokemonListResult;
             }
             return Array.Empty<PokemonList>();
         }
@@ -58,7 +84,7 @@ namespace Pokemon.Infrastructure.Repositories
                 {
                     PokemonName = pokemonDetails.PokemonName,
                     PokemonSprites = pokemonDetails.PokemonSprite.Sprite,
-                    Order=pokemonDetails.Order
+                    Order = pokemonDetails.Order
                 };
                 return searchedPokemon;
             }

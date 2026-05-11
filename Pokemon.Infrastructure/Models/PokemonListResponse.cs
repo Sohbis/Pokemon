@@ -23,7 +23,7 @@ namespace Pokemon.Infrastructure.Models
     public sealed class PokemonNamesListResponse
     {
         [JsonPropertyName("results")]
-        public IEnumerable<PokemonName> PokemonNames { get; init; } = Enumerable.Empty<PokemonName>();
+        public IReadOnlyList<PokemonName> PokemonNames { get; init; }
 
     }
 

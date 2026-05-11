@@ -27,17 +27,43 @@ namespace Pokemon.Application.Services
 
         public async Task<IEnumerable<PokemonListItemDto>> GetPokemonNamesListAsync(PokemonListRequest param)
         {
-            var pokemonList = await _pokemonRepository.GetPokemonListAsync(param.Offset,param.Limit);
-            if(pokemonList == null || !pokemonList.Any())
+            var pokemonList = await _pokemonRepository.GetPokemonListAsync(param.Offset, param.Limit);
+            if (pokemonList == null || !pokemonList.Any())
             {
                 throw new PokemonNotFoundException($"with offset '{param.Offset}' and limit '{param.Limit}'");
             }
-            var pokemonListDto = pokemonList.Select(p => new PokemonListItemDto
+            //var pokemonListDto = pokemonList.Select(p => new PokemonListItemDto
+            //{
+            //    Name = p.PokemonName,
+            //    Order = p.Order,
+            //    //Abilities = string.Join(", ", p.PokemonAbilities),
+            //    //Type = string.Join(", ", p.PokemonTypes)
+            //});
+
+            //var pokemonListDto = new List<PokemonListItemDto>();
+            //foreach (var p in pokemonList)
+            //{
+            //    var pokemonDto = new PokemonListItemDto
+            //    {
+            //        Name = p.PokemonName,
+            //    };
+            //    if (p.NotFound.HasValue && p.NotFound==true) { 
+            //        pokemonDto.NotFound = true;
+            //    }
+            //    else
+            //    {
+            //        pokemonDto.Order = p.Order;
+            //    }
+            //    pokemonListDto.Add(pokemonDto);
+            //}
+            var pokemonListDto = pokemonList.Select(p =>
             {
-                Name = p.PokemonName,
-                Order = p.Order,
-                //Abilities = string.Join(", ", p.PokemonAbilities),
-                //Type = string.Join(", ", p.PokemonTypes)
+                return new PokemonListItemDto
+                {
+                    Name = p.PokemonName,
+                    Order = p.Order.HasValue ? p.Order : null,
+                    NotFound = p.NotFound == true ? p.NotFound : null
+                };
             });
             return pokemonListDto;
         }

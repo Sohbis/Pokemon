@@ -70,7 +70,7 @@ namespace Pokemon.Infrastructure.Http
                 return null;
             }
 
-            var temp = await response.Content.ReadAsStringAsync();
+            //var temp = await response.Content.ReadAsStringAsync();
 
 
             return await response.Content.ReadFromJsonAsync<PokemonSearchResponse>();
