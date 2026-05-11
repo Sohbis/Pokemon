@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace Pokemon.Infrastructure.Models
 {
-    public sealed class PokemonSearchResponse : PokemonListResponse
+    public sealed class PokemonSearchResponse 
     {
         [JsonPropertyName("name")]
         public string PokemonName { get; set; } = string.Empty;
+
+        [JsonPropertyName("order")] public int Order { get; set; }
 
         [JsonPropertyName("sprites")]
         public PokemonSprite PokemonSprite { get; set; } = new();

@@ -53,8 +53,7 @@ namespace Pokemon.Infrastructure.Repositories
                         {
                             PokemonName = pokemonList.PokemonNames[i].Name,
                             NotFound = true,
-                            //Abilities = p.Abilities,
-                            //Type = p.Types,
+                           
                         });
                     }
                 }

@@ -18,6 +18,10 @@ namespace Pokemon.Api.Controllers
             _pokemonService = pokemonService;
         }
 
+ 
+        [ProducesResponseType(typeof(IEnumerable<PokemonListItemDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [HttpGet("GetPokemonList", Name = "/GetPokemonList")]
         public  async Task<IActionResult> GetPokemonList([FromQuery] PokemonListRequest param)
         {

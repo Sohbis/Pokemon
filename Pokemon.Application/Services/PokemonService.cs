@@ -61,7 +61,7 @@ namespace Pokemon.Application.Services
                 return new PokemonListItemDto
                 {
                     Name = p.PokemonName,
-                    Order = p.Order.HasValue ? p.Order : null,
+                    Order = p.Order,
                     NotFound = p.NotFound == true ? p.NotFound : null
                 };
             });
