@@ -58,12 +58,25 @@ namespace Pokemon.Application.Services
             //}
             var pokemonListDto = pokemonList.Select(p =>
             {
+                if (p.NotFound.HasValue && p.NotFound == true)
+                {
+                    return new PokemonListItemDto
+                    {
+                        Name = p.PokemonName,
+                        NotFound = true
+                    };
+                }
+                else
+                {
+
+                }
                 return new PokemonListItemDto
                 {
                     Name = p.PokemonName,
                     Order = p.Order,
-                    NotFound = p.NotFound == true ? p.NotFound : null
+
                 };
+
             });
             return pokemonListDto;
         }
