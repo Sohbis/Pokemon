@@ -58,7 +58,7 @@ namespace Pokemon.Application.Services
             //}
             var pokemonListDto = pokemonList.Select(p =>
             {
-                if (p.NotFound.HasValue && p.NotFound == true)
+                if (p.NotFound is true)
                 {
                     return new PokemonListItemDto
                     {
