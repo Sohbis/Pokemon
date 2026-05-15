@@ -13,8 +13,8 @@ namespace Pokemon.Domain.ValueObjects
     }
     public sealed class PokemonAbilities
     {
-        public PokemonAbilities Ability { get; set; } = new PokemonAbilities();
-        public string IsHidden { get; set; }=string.Empty;
+        public PokemonAbility Ability { get; set; } = new PokemonAbility();
+        public bool IsHidden { get; set; }
         public int Slot { get; set; }
     }
 }

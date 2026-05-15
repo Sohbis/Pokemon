@@ -12,7 +12,12 @@ namespace Pokemon.Domain.Entities
         public string PokemonName { get; set; } = string.Empty;
         public int? Order { get; set; }
         public bool? NotFound { get; set; }
-        //public PokemonAbilities Abilities { get; set; } = new PokemonAbilities();
-        //public PokemonTypes Type { get; set; } = new PokemonTypes();
+        public IReadOnlyList<PokemonAbilities> Abilities { get; set; } = new List<PokemonAbilities>();
+
+        //public IReadOnlyList<Types> Types { get; set; } = new List<Types>();
+
+        //public IList<Types> Types { get; set; } = new List<Types>();
+
+        public IReadOnlyList<Types> Types { get; init; } = new List<Types>();
     }
 }

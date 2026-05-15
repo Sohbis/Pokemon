@@ -74,6 +74,8 @@ namespace Pokemon.Application.Services
                 {
                     Name = p.PokemonName,
                     Order = p.Order,
+                    Abilities= string.Join(", ",p.Abilities.Select(p=> p.Ability.AbilityName)),
+                    Type = string.Join(", ", p.Types.Select(data => data.Type.Name))
 
                 };
 

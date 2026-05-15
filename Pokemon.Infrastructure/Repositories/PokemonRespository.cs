@@ -2,6 +2,7 @@
 using Pokemon.Domain.Enums;
 using Pokemon.Domain.Exceptions;
 using Pokemon.Domain.Interfaces;
+using Pokemon.Domain.ValueObjects;
 using Pokemon.Infrastructure.Http;
 using Pokemon.Infrastructure.Models;
 using System;
@@ -43,8 +44,8 @@ namespace Pokemon.Infrastructure.Repositories
                         {
                             PokemonName = results[i].PokemonName,
                             Order = results[i].Order,
-                            //Abilities = p.Abilities,
-                            //Type = p.Types,
+                            Abilities = results[i].Abilities,
+                            Types = results[i].Types,
                         });
                     }
                     else
@@ -53,7 +54,7 @@ namespace Pokemon.Infrastructure.Repositories
                         {
                             PokemonName = pokemonList.PokemonNames[i].Name,
                             NotFound = true,
-                           
+
                         });
                     }
                 }
@@ -79,13 +80,79 @@ namespace Pokemon.Infrastructure.Repositories
             //}
             if (pokemonDetails != null)
             {
+                //var temp = pokemonDetails.Types;
+
+                //foreach (var type in temp)
+                //{
+                //    var typeName = type.Slot;
+                //    var typeValue = type.PType;
+                //}
+                //var temp2 = temp.Select(t =>
+                //{
+                //  var obj = new
+                //  {
+                //        Slot = t.Slot,
+                //        PType = t.PType,
+                //  };
+                //    return obj;
+
+                //});
                 var searchedPokemon = new PokemonDetails
                 {
                     PokemonName = pokemonDetails.PokemonName,
                     PokemonSprites = pokemonDetails.PokemonSprite.Sprite,
-                    Order = pokemonDetails.Order
+                    Order = pokemonDetails.Order,
+                    Abilities = pokemonDetails.Abilities.Select(t=> new Domain.ValueObjects.PokemonAbilities
+                    {
+                        Slot= t.AbilitySlot,
+                        IsHidden = t.IsAbilityHidden,
+                        Ability = new Domain.ValueObjects.PokemonAbility
+                        {
+                            AbilityName = t.Ability.AbilityName,
+                            Url = t.Ability.Url
+                        }
+
+                    }).ToArray(),
+
+                    Types = pokemonDetails.Types.Select(t => new Domain.ValueObjects.Types
+                    {
+                        Slot = t.Slot,
+                        // Assuming your Domain Type also has Name/Url or similar
+                        Type = new Domain.ValueObjects.Type
+                        {
+                            Name = t.PType.Name,
+                            Url = t.PType.Url
+                        }
+                    }).ToArray()
+
                 };
+
                 return searchedPokemon;
+
+                //var pokemonListResult = new PokemonDetails();
+
+                //pokemonListResult.PokemonName = pokemonDetails.PokemonName;
+                //pokemonListResult.Order = pokemonDetails.Order;
+                //pokemonListResult.PokemonSprites = pokemonDetails.PokemonSprite.Sprite;
+
+                //var pokemonListResult1 = new PokemonDetails
+                //{
+                //    Types = new List<Types> {
+                //        new Types { Slot = 1 }, new Types { Slot = 2 }
+                //    }
+                //};
+
+                ////pokemonListResult1.Types = new List<Types> { new Types { Slot = 1 }, new Types { Slot = 2 } };
+
+
+                //for (var i = 0; i < pokemonDetails.Types.Count; i++)
+                //{
+                //    pokemonListResult.Types[i].Slot = pokemonDetails.Types[i].Slot;
+                //    pokemonListResult.Types[i].Type.Name = pokemonDetails.Types[i].PType.Name;
+                //    pokemonListResult.Types[i].Type.Url = pokemonDetails.Types[i].PType.Url;
+                //}
+
+                //return pokemonListResult;
             }
 
             return null;
